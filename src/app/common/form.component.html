@@ -1,0 +1,33 @@
+<div id='form-wrap'>
+
+    <h2>{{name}}</h2>
+
+    <form>
+        <div *ngFor="let field of objectKeys">
+            <div *ngIf="field.indexOf('Values') == -1">
+                <div [ngSwitch]="fields[field]">
+                    <div *ngSwitchCase="'text'" class="form-group">
+                        <label for="{{field}}">{{field}}</label>
+                        <input class="form-control"  id={{field}} [(ngModel)]="form[field]" [ngModelOptions]="{standalone: true}" type="{{fields[field]}} required">
+
+                    </div>
+                    <div *ngSwitchCase="'checkbox'" class="form-group">
+                        <label for="{{field}}">{{field}}</label>
+                        <select id={{field.key}} class="form-control" [(ngModel)]="form[field]" [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let option of fields[field+'Values']" value="{{option.id}}">
+                                {{option.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success" (click)="onSubmit(form)">Отправить</button>
+    </form>
+
+</div>
+
+
+
+
