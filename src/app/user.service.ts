@@ -10,7 +10,7 @@ export class UserService {
 
     register(data:any) {
         let body = JSON.stringify(data);
-        return this.http.post('http://test3/index.php/user/register', body);
+        return this.http.post('http://test-wallet-backend/index.php/user/register', body);
     }
 
 }

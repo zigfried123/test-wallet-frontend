@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Form} from "./common/form";
 import {UserService} from "./user.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'user',
@@ -8,17 +9,22 @@ import {UserService} from "./user.service";
 })
 export class UserComponent implements OnInit{
 
-    constructor(private service: UserService){
+    registerForm: FormGroup;
 
+    constructor(private service: UserService, private fb: FormBuilder){
     }
 
     ngOnInit(): void {
-        //alert(1);
+        this.registerForm = this.fb.group({
+            name: ['test'],
+            currency: [1]
+        });
+
     }
 
-    submit(form:Form)
+    submit(form:any)
     {
-        this.service.register(form).subscribe(x => {
+        this.service.register(form.value).subscribe(x => {
             console.log(x);
         });
     }

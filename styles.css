@@ -21,8 +21,8 @@ h2{
 }
 
 #form-wrap{
-    margin:0 auto;
-    width:500px;
+    display: inline-block;
+
 }
 
 .center{

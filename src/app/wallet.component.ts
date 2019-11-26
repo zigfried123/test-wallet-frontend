@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Form} from "./common/form";
 import {WalletService} from "./wallet.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'wallet',
@@ -11,10 +11,19 @@ export class WalletComponent implements OnInit {
     balance: string;
     walletId: number;
 
-    constructor(private service: WalletService) {
+    walletForm: FormGroup;
+
+    constructor(private service: WalletService, private fb: FormBuilder) {
     }
 
     ngOnInit(): void {
+
+        this.walletForm = this.fb.group({
+            sum: [0],
+            currency: [1],
+            reason: [1],
+            transactionType: [1]
+        });
 
         this.service.getLastWalletId().subscribe((x:any) => {
                 this.walletId = x;
@@ -24,8 +33,8 @@ export class WalletComponent implements OnInit {
     }
 
     submit(form: any) {
-        if (!form.sum) form.sum = 0;
-        this.service.changeBalance(this.walletId, form).subscribe((x: any) => {
+
+        this.service.changeBalance(this.walletId, form.value).subscribe((x: any) => {
             this.balance = x.balance;
         }, error => {
             //console.log(error)

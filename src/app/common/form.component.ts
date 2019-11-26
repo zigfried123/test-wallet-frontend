@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Injectable, Input, OnInit, Output} from '@angular/core';
 import {Form} from "./form";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {UserService} from "../user.service";
 
 
 @Component({
@@ -7,34 +9,28 @@ import {Form} from "./form";
     templateUrl: './form.component.html'
 })
 
-export class FormComponent implements OnInit{
+export class FormComponent implements OnInit {
 
-    @Input() walletId:string;
-    @Input() name:string;
-    @Input() fields:{};
+    @Input() parentForm: FormGroup;
+    @Input() walletId: string;
+    @Input() name: string;
+    @Input() fields: {};
     @Output() submitForm = new EventEmitter();
-
-    form = new Form();
 
     objectKeys: any;
 
+    constructor(private fb: FormBuilder) {
+    }
 
     ngOnInit(): void {
 
         this.objectKeys = Object.keys(this.fields);
-
-        //console.log(Object.keys(this.fields));
-
-
-      for(let field in this.fields){
-          if(this.fields[field] == 'checkbox'){
-              this.form[field] = 1;
-          }
-      }
     }
 
-    onSubmit(form:any) {
+    onSubmit() {
+        if(!this.parentForm.invalid) {
+            this.submitForm.emit(this.parentForm);
+        }
 
-      this.submitForm.emit(form);
     }
 }

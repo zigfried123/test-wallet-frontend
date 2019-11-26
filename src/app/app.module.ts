@@ -19,6 +19,8 @@ import {FormComponent} from "./common/form.component";
 import {UserService} from "./user.service";
 import {WalletService} from "./wallet.service";
 import {WalletComponent} from "./wallet.component";
+import {MatSelectModule} from "@angular/material/select";
+import {MatButtonModule} from "@angular/material/button";
 
 
 const appRoutes: Routes =[
@@ -32,7 +34,7 @@ const appRoutes: Routes =[
 ];
 
 @NgModule({
-    imports:      [BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule, ReactiveFormsModule, MatSliderModule, MatFormFieldModule, MatAutocompleteModule, BrowserAnimationsModule,  MatInputModule, MatIconModule],
+    imports:      [BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule, ReactiveFormsModule, MatSliderModule, MatFormFieldModule, MatAutocompleteModule,  MatInputModule, BrowserAnimationsModule,  MatInputModule, MatSelectModule, MatButtonModule, MatIconModule],
     exports: [  ],
     declarations: [ AppComponent, SearchFilmComponent, AboutComponent, UserComponent, FormComponent, WalletComponent],
     bootstrap:    [ AppComponent ],
